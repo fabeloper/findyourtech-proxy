@@ -90,7 +90,7 @@ app.get("/tech", async (req, res, next) => {
   });
   try {
     const twitterData = await twitterClient.tweets.search({ q });
-    const tweetsFiltered = twitterData.statuses.filter((tweet) => tweet.truncated);
+    const tweetsFiltered = twitterData.statuses.filter((tweet) => !tweet.truncated);
     const techItems = tweetsFiltered.map((tweet) => tweetToTechItem(tweet));
     res.status(200).json({ techItems });
   } catch (err) {
