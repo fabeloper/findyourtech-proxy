@@ -20,6 +20,8 @@ const HOST = "localhost";
 // Logging
 app.use(morgan("dev"));
 
+app.disable('etag');
+
 const tweetToTechItem = (tweet) => {
   const tweetToMap = tweet.extended_tweet ? tweet.extended_tweet : tweet;
   return {
@@ -90,12 +92,11 @@ app.get("/tech", async (req, res, next) => {
   });
   try {
     const twitterData = await twitterClient.tweets.search({ q });
-    console.log(twitterData);
     const tweetsFiltered = twitterData.statuses.filter((tweet) => tweet.tru);
     const techItems = tweetsFiltered.map((tweet) => tweetToTechItem(tweet));
     res.status(200).json({ techItems });
   } catch (err) {
-    console.log(err);
+    res.status(500).json({ err });
   }
 });
 
