@@ -88,12 +88,15 @@ app.get("/tech", async (req, res, next) => {
     accessToken,
     accessTokenSecret,
   });
-
-  const twitterData = await twitterClient.tweets.search({ q });
-  console.log(twitterData);
-  const tweetsFiltered = twitterData.statuses.filter((tweet) => tweet.tru);
-  const techItems = tweetsFiltered.map((tweet) => tweetToTechItem(tweet));
-  res.status(200).json({ techItems });
+  try {
+    const twitterData = await twitterClient.tweets.search({ q });
+    console.log(twitterData);
+    const tweetsFiltered = twitterData.statuses.filter((tweet) => tweet.tru);
+    const techItems = tweetsFiltered.map((tweet) => tweetToTechItem(tweet));
+    res.status(200).json({ techItems });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // Authorization
