@@ -83,8 +83,8 @@ app.get("/tech", async (req, res, next) => {
   const accessTokenSecret = tokens[1];
   // Initialize twitter api client
   const twitterClient = new TwitterClient({
-    apiKey: "vJ9evbHSdPCxOVR7uKklq6sAN",
-    apiSecret: "zurk0GYL32F7FQnhvY05QLwqTZA0Ai6DQ4019w9xsWbdGaKuMJ",
+    apiKey: "fntAPc9A0rg2JvTGsrJUmRJ42",
+    apiSecret: "r335HrRZRB4aewDsKT6BGFmeH4wLF07oyTssvGRU4K53ztXlxK",
     accessToken,
     accessTokenSecret,
   });
