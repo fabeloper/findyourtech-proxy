@@ -73,10 +73,7 @@ const getQualityVideo = (videoInfo) => {
 
 // GET Tech
 app.get("/tech", async (req, res, next) => {
-  let q = '"%23DNFDuel" AND -filter:retweets AND filter:videos"';
-  if (req.query.hashtag) {
-    q = `"%23${req.query.hashtag}" AND -filter:retweets AND filter:videos`;
-  }
+  let q = `${req.query.character} #Multiversus AND -filter:retweets AND filter:videos`;
   const authHeader = req.headers.authorization;
   const tokens = authHeader.split(",");
   const accessToken = tokens[0];
@@ -89,6 +86,7 @@ app.get("/tech", async (req, res, next) => {
     accessTokenSecret,
   });
   try {
+    console.log(q);
     const twitterData = await twitterClient.tweets.search({ q });
     const tweetsFiltered = twitterData.statuses.filter((tweet) => !tweet.truncated);
     const techItems = tweetsFiltered.map((tweet) => tweetToTechItem(tweet));
